@@ -1,0 +1,19 @@
+.launch-card {
+  width: 30%;
+  min-height: 520px;
+  background-color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: .5rem;
+  margin: .75rem;
+  border-radius: 4px;
+
+  img {
+    max-width: 320px;
+    max-height: 240px;
+  }
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
