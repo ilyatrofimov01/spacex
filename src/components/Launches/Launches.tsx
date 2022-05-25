@@ -13,7 +13,7 @@ import "./Launches.scss";
 export const Launches = () => {
   const [launches, setLaunches] = useState<Launch[]>([]);
   const [totalLaunches, setTotalLaunches] = useState<number>(0);
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedLaunchId, setSelectedLaunchId] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [filters, setFilters] = useState<Filter>({ name: "", flightNumber: null, date: "" });
@@ -34,7 +34,7 @@ export const Launches = () => {
 
   const onCardClick = (id: string) => {
     setSelectedLaunchId(id);
-    setShowModal(true);
+    setIsModalOpen(true);
   };
 
   return (
@@ -61,13 +61,13 @@ export const Launches = () => {
       </InfiniteScroll> : <LaunchesNotFound />}
 
       <Modal
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
       >
         <ModalBody
           selectedLaunchId={selectedLaunchId}
           onCloseModal={() => {
-            setShowModal(false);
+            setIsModalOpen(false);
           }}
         />
       </Modal>

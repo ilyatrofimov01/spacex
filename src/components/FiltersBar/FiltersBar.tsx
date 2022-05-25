@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { Filter } from "../../types/filter";
 import "./FiltersBar.scss";
 
-interface Props {
+interface FiltersBarProps {
   setFilters: (filters: Filter) => void;
 }
 
-export const FiltersBar = ({ setFilters }: Props) => {
+export const FiltersBar = ({ setFilters }: FiltersBarProps) => {
   const { register, handleSubmit } = useForm<Filter>({ mode: "onSubmit" });
 
   const onFormSubmit = (filters: Filter) => {
