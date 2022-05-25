@@ -37,15 +37,17 @@ export const Launches = () => {
     setIsModalOpen(true);
   };
 
+  const onScrollMore = () => {
+    setPage(page + 1);
+  };
+
   return (
     <div className="launches">
       <FiltersBar setFilters={setFiltersHandler} />
 
       {launches.length ? <InfiniteScroll
         dataLength={page * 9}
-        next={() => {
-          setPage(page + 1);
-        }}
+        next={onScrollMore}
         hasMore={page * 9 < totalLaunches}
         loader={<h2>Loading...</h2>}
       >
