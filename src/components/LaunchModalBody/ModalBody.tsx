@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./ModalBody.scss";
 import { getLaunchById } from "../../services/LaunchService";
 import { Launch } from "../../types/launchTypes";
 import { toLocalDateFormatter } from "../../utils/dateFormatter";
+import "./ModalBody.scss";
 
 interface Props {
   selectedLaunchId: string,
@@ -12,6 +12,7 @@ interface Props {
 export const ModalBody = ({ selectedLaunchId, onCloseModal }: Props) => {
 
   const [selectedLaunch, setSelectedLaunch] = useState<Launch | null>(null);
+
   useEffect(() => {
     getLaunchById(selectedLaunchId).then((res: Launch) => setSelectedLaunch(res));
   }, [selectedLaunchId]);

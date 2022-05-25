@@ -1,8 +1,8 @@
 import React from "react";
 import { Launch } from "../../types/launchTypes";
 import { toLocalDateFormatter } from "../../utils/dateFormatter";
-import "./LaunchCard.scss";
 import { noImage } from "../../assets/img";
+import "./LaunchCard.scss";
 
 interface Props {
   launchData: Launch,

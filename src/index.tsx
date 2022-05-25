@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Modal from "react-modal";
 import { App } from "./components/App";
 import "./index.scss";
-import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 

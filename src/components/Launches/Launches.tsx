@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getLaunches } from "../../services/LaunchService";
-import { LaunchCard } from "../LaunchCard";
-import { Launch } from "../../types/launchTypes";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { ModalBody } from "../LaunchModalBody/ModalBody";
 import Modal from "react-modal";
+import { getLaunches } from "../../services/LaunchService";
 import { Filter } from "../../types/filter";
+import { Launch } from "../../types/launchTypes";
 import { FiltersBar } from "../FiltersBar";
+import { LaunchCard } from "../LaunchCard";
+import { ModalBody } from "../LaunchModalBody/ModalBody";
 import { LaunchesNotFound } from "./LaunchesNotFound";
 import "./Launches.scss";
 
@@ -18,12 +18,6 @@ export const Launches = () => {
   const [page, setPage] = useState<number>(1);
   const [filters, setFilters] = useState<Filter>({ name: "", flightNumber: null, date: "" });
 
-  const setFiltersHandler = (filters: Filter) => {
-    setFilters(filters);
-    setLaunches([]);
-    setPage(1);
-  };
-
   useEffect(() => {
     getLaunches({ page, filters })
       .then(({ launchesList, totalDocs }: { launchesList: Launch[], totalDocs: number }) => {
@@ -31,6 +25,12 @@ export const Launches = () => {
         setTotalLaunches(totalDocs);
       });
   }, [page, filters]);
+
+  const setFiltersHandler = (filters: Filter) => {
+    setFilters(filters);
+    setLaunches([]);
+    setPage(1);
+  };
 
   const onCardClick = (id: string) => {
     setSelectedLaunchId(id);
