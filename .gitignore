@@ -8,8 +8,6 @@
 # testing
 /coverage
 
-#idea files 
-/.idea
 
 # production
 /build
