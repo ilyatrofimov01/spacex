@@ -1,10 +1,10 @@
 import React from "react";
-import "./Header.scss";
+import { HeaderBrandName, HeaderContainer } from "./styled-components";
 
 export const Header = () => {
   return (
-    <header>
-      <h1>SpaceX</h1>
-    </header>
+    <HeaderContainer>
+      <HeaderBrandName>SpaceX</HeaderBrandName>
+    </HeaderContainer>
   );
 };

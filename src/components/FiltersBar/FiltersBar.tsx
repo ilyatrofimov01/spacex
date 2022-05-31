@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Filter } from "../../types/filter";
-import "./FiltersBar.scss";
+import { FormInput, Label, SearchForm, SubmitButton } from "./styled-components";
 
 interface FiltersBarProps {
   setFilters: (filters: Filter) => void;
@@ -16,21 +16,21 @@ export const FiltersBar = ({ setFilters }: FiltersBarProps) => {
 
   return (
     <div>
-      <form className="filters-form" onSubmit={handleSubmit(onFormSubmit)}>
-        <label>
+      <SearchForm onSubmit={handleSubmit(onFormSubmit)}>
+        <Label>
           Rocket Name:
-          <input className="form-control" type="text" {...register("name")} />
-        </label>
-        <label>
+          <FormInput type="text" {...register("name")} />
+        </Label>
+        <Label>
           FlightNumber:
-          <input className="form-control" type="number" {...register("flightNumber")} />
-        </label>
-        <label>
+          <FormInput type="number" {...register("flightNumber")} />
+        </Label>
+        <Label>
           FlightNumber:
-          <input className="form-control" type="date" {...register("date")} />
-        </label>
-        <button type="submit"> Apply Filters</button>
-      </form>
+          <FormInput type="date" {...register("date")} />
+        </Label>
+        <SubmitButton type="submit"> Apply Filters</SubmitButton>
+      </SearchForm>
     </div>
   );
 };

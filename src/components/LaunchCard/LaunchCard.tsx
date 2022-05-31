@@ -2,7 +2,7 @@ import React from "react";
 import { Launch } from "../../types/launchTypes";
 import { toLocalDateFormatter } from "../../utils/dateFormatter";
 import { noImage } from "../../assets/img";
-import "./LaunchCard.scss";
+import { CardContainer } from "./styled-components";
 
 interface LaunchCardProps {
   launchData: Launch,
@@ -14,7 +14,7 @@ export const LaunchCard = ({ launchData, onCardClick }: LaunchCardProps) => {
   const imgPath = links.youtube_id ? `https://img.youtube.com/vi/${links.youtube_id}/0.jpg` : noImage;
 
   return (
-    <div className="launch-card" onClick={() => onCardClick(id)}>
+    <CardContainer onClick={() => onCardClick(id)}>
       <div className="launch-card__preview">
         <img src={imgPath} alt="launch preview" />
       </div>
@@ -23,6 +23,6 @@ export const LaunchCard = ({ launchData, onCardClick }: LaunchCardProps) => {
         <p>{`Launch Date: ${toLocalDateFormatter(date_utc)}`}</p>
         <p>{`Flight Number: ${flightNumber}`}</p>
       </div>
-    </div>
+    </CardContainer>
   );
 };

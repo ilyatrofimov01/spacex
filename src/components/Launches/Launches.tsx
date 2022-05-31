@@ -41,27 +41,27 @@ export const Launches = () => {
     setPage(page + 1);
   };
 
+  const showCards = launches.length ? <InfiniteScroll
+    dataLength={page * 9}
+    next={onScrollMore}
+    hasMore={page * 9 < totalLaunches}
+    loader={<h2>Loading...</h2>}
+  >
+    {launches.map((launch: Launch) => {
+      return (
+        <LaunchCard
+          key={launch.id}
+          launchData={launch}
+          onCardClick={onCardClick}
+        />
+      );
+    })}
+  </InfiniteScroll> : <LaunchesNotFound />;
+
   return (
     <div className="launches">
       <FiltersBar setFilters={setFiltersHandler} />
-
-      {launches.length ? <InfiniteScroll
-        dataLength={page * 9}
-        next={onScrollMore}
-        hasMore={page * 9 < totalLaunches}
-        loader={<h2>Loading...</h2>}
-      >
-        {launches.map((launch: Launch) => {
-          return (
-            <LaunchCard
-              key={launch.id}
-              launchData={launch}
-              onCardClick={onCardClick}
-            />
-          );
-        })}
-      </InfiniteScroll> : <LaunchesNotFound />}
-
+      {showCards}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
