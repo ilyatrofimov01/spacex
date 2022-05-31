@@ -16,14 +16,12 @@ class Launches {
     this.launches = [];
   }
 
-  fetchLaunches(fetchParams: FetchLaunchesProps) {
-    (async () => {
-      const res = await getLaunches(fetchParams);
-      runInAction(() => {
-        this.launches = [...this.launches, ...res.launchesList];
-        this.totalDocs = res.totalDocs;
-      });
-    })();
+  async fetchLaunches(fetchParams: FetchLaunchesProps) {
+    const res = await getLaunches(fetchParams);
+    runInAction(() => {
+      this.launches = [...this.launches, ...res.launchesList];
+      this.totalDocs = res.totalDocs;
+    });
   }
 
 
