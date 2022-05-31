@@ -19,6 +19,6 @@ export const FormInput = styled("input", {
   margin: "4px"
 });
 
-export const  SearchForm = styled("form",{
+export const SearchForm = styled("form", {
   padding: "1rem"
-})
+});

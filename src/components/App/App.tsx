@@ -5,7 +5,7 @@ import { Launches } from "../Launches";
 export function App() {
 
   return (
-    <div className="App">
+    <div>
       <Header />
       <Launches />
     </div>

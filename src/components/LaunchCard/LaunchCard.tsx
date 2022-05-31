@@ -15,10 +15,10 @@ export const LaunchCard = ({ launchData, onCardClick }: LaunchCardProps) => {
 
   return (
     <CardContainer onClick={() => onCardClick(id)}>
-      <div className="launch-card__preview">
+      <div>
         <img src={imgPath} alt="launch preview" />
       </div>
-      <div className="launch-card__short-description">
+      <div>
         <p>{`Rocket Name: ${name}`}</p>
         <p>{`Launch Date: ${toLocalDateFormatter(date_utc)}`}</p>
         <p>{`Flight Number: ${flightNumber}`}</p>
