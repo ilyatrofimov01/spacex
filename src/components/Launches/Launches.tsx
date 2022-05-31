@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Modal from "react-modal";
-import { getLaunches } from "../../services/LaunchService";
 import { Filter } from "../../types/filter";
 import { Launch } from "../../types/launchTypes";
 import { FiltersBar } from "../FiltersBar";
@@ -13,8 +12,6 @@ import { observer } from "mobx-react-lite";
 import "./Launches.scss";
 
 export const Launches = observer(() => {
-  const [launches, setLaunches] = useState<Launch[]>([]);
-  const [totalLaunches, setTotalLaunches] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedLaunchId, setSelectedLaunchId] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -23,17 +20,11 @@ export const Launches = observer(() => {
 
   useEffect(() => {
     launchesStore.fetchLaunches({ page, filters });
-    // getLaunches({ page, filters })
-    //   .then(({ launchesList, totalDocs }: { launchesList: Launch[], totalDocs: number }) => {
-    //     setLaunches([...launches, ...launchesList]);
-    //     setTotalLaunches(totalDocs);
-    //   });
   }, [page, filters]);
 
   const setFiltersHandler = (filters: Filter) => {
     setFilters(filters);
     launchesStore.clearLaunches()
-   // setLaunches([]);
     setPage(1);
   };
 

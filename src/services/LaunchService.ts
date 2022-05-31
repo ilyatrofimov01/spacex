@@ -66,7 +66,6 @@ const getLaunchById = (id: string) => {
   return axios.get<Launch>(`${baseURL}/launches/${id}`).then(res => {
     const { id, date_utc, name, details, flight_number, links } = res.data;
     return { id, date_utc, name, details, flight_number, links };
-
   });
 };
 
