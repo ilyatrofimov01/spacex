@@ -1,34 +1,30 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Modal from "react-modal";
-import { getLaunches } from "../../services/LaunchService";
 import { Filter } from "../../types/filter";
 import { Launch } from "../../types/launchTypes";
 import { FiltersBar } from "../FiltersBar";
 import { LaunchCard } from "../LaunchCard";
 import { ModalBody } from "../LaunchModalBody/ModalBody";
 import { LaunchesNotFound } from "./LaunchesNotFound";
+import launchesStore from "../../store/launches";
+import { observer } from "mobx-react-lite";
 import "./Launches.scss";
 
-export const Launches = () => {
-  const [launches, setLaunches] = useState<Launch[]>([]);
-  const [totalLaunches, setTotalLaunches] = useState<number>(0);
+export const Launches = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedLaunchId, setSelectedLaunchId] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [filters, setFilters] = useState<Filter>({ name: "", flightNumber: null, date: "" });
 
+
   useEffect(() => {
-    getLaunches({ page, filters })
-      .then(({ launchesList, totalDocs }: { launchesList: Launch[], totalDocs: number }) => {
-        setLaunches([...launches, ...launchesList]);
-        setTotalLaunches(totalDocs);
-      });
+    launchesStore.fetchLaunches({ page, filters });
   }, [page, filters]);
 
   const setFiltersHandler = (filters: Filter) => {
     setFilters(filters);
-    setLaunches([]);
+    launchesStore.clearLaunches()
     setPage(1);
   };
 
@@ -41,13 +37,13 @@ export const Launches = () => {
     setPage(page + 1);
   };
 
-  const showCards = launches.length ? <InfiniteScroll
+  const showCards = launchesStore.launches.length ? <InfiniteScroll
     dataLength={page * 9}
     next={onScrollMore}
-    hasMore={page * 9 < totalLaunches}
+    hasMore={page * 9 < launchesStore.totalDocs}
     loader={<h2>Loading...</h2>}
   >
-    {launches.map((launch: Launch) => {
+    {launchesStore.launches.map((launch: Launch) => {
       return (
         <LaunchCard
           key={launch.id}
@@ -75,4 +71,4 @@ export const Launches = () => {
       </Modal>
     </div>
   );
-};
+});
